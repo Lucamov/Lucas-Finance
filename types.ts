@@ -25,6 +25,11 @@ export enum MessageRole {
   MODEL = 'model'
 }
 
+export interface User {
+  username: string;
+  isLoggedIn: boolean;
+}
+
 export interface Transaction {
   id: string;
   description: string;

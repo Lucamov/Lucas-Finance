@@ -82,9 +82,9 @@ const Advisor: React.FC<AdvisorProps> = ({ transactions }) => {
   };
 
   return (
-    <div className="flex flex-col h-full bg-slate-900 rounded-xl overflow-hidden shadow-2xl border border-slate-800">
+    <div className="flex flex-col h-full bg-neutral-900 rounded-xl overflow-hidden shadow-2xl border border-neutral-800">
       {/* Header */}
-      <div className="flex items-center justify-between px-6 py-4 bg-slate-950/50 border-b border-slate-800">
+      <div className="flex items-center justify-between px-6 py-4 bg-neutral-950/50 border-b border-neutral-800">
         <h2 className="text-lg font-semibold text-orange-400 flex items-center gap-2">
           <Bot className="w-5 h-5" /> Gemini Advisor
         </h2>
@@ -98,7 +98,7 @@ const Advisor: React.FC<AdvisorProps> = ({ transactions }) => {
           </button>
           <button 
             onClick={() => setMessages([])}
-            className="text-slate-500 hover:text-red-400 transition-colors p-1.5 rounded-full hover:bg-slate-800"
+            className="text-neutral-500 hover:text-red-400 transition-colors p-1.5 rounded-full hover:bg-neutral-800"
           >
             <Trash2 className="w-4 h-4" />
           </button>
@@ -106,7 +106,7 @@ const Advisor: React.FC<AdvisorProps> = ({ transactions }) => {
       </div>
 
       {/* Messages Area */}
-      <div className="flex-1 overflow-y-auto p-4 space-y-4">
+      <div className="flex-1 overflow-y-auto p-4 space-y-4 custom-scrollbar">
         {messages.map((msg) => (
           <div
             key={msg.id}
@@ -123,7 +123,7 @@ const Advisor: React.FC<AdvisorProps> = ({ transactions }) => {
             <div className={`max-w-[85%] rounded-2xl px-4 py-3 text-sm leading-relaxed shadow-sm ${
               msg.role === 'user' 
                 ? 'bg-orange-600 text-white rounded-tr-none' 
-                : 'bg-slate-800 text-slate-200 rounded-tl-none border border-slate-700'
+                : 'bg-neutral-800 text-neutral-200 rounded-tl-none border border-neutral-700'
             }`}>
               <ReactMarkdown className="prose prose-invert prose-sm max-w-none">
                 {msg.text}
@@ -140,19 +140,19 @@ const Advisor: React.FC<AdvisorProps> = ({ transactions }) => {
       </div>
 
       {/* Input Area */}
-      <div className="p-4 bg-slate-950/30 border-t border-slate-800">
-        <div className="flex items-end gap-2 bg-slate-800/50 p-2 rounded-xl border border-slate-700 focus-within:border-orange-500 transition-all">
+      <div className="p-4 bg-neutral-950/30 border-t border-neutral-800">
+        <div className="flex items-end gap-2 bg-neutral-800/50 p-2 rounded-xl border border-neutral-700 focus-within:border-orange-500 transition-all">
           <input
             value={input}
             onChange={(e) => setInput(e.target.value)}
             onKeyDown={(e) => e.key === 'Enter' && handleSend()}
             placeholder="Ex: Quanto gastei com comida? Devo investir?"
-            className="flex-1 bg-transparent text-slate-100 placeholder-slate-500 outline-none py-2.5 px-3"
+            className="flex-1 bg-transparent text-neutral-100 placeholder-neutral-500 outline-none py-2.5 px-3"
           />
           <button
             onClick={handleSend}
             disabled={!input.trim() || isLoading}
-            className="p-2.5 bg-orange-600 hover:bg-orange-500 disabled:bg-slate-700 text-white rounded-lg transition-colors"
+            className="p-2.5 bg-orange-600 hover:bg-orange-500 disabled:bg-neutral-700 text-white rounded-lg transition-colors"
           >
             <Send className="w-5 h-5" />
           </button>

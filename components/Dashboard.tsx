@@ -92,9 +92,9 @@ const Dashboard: React.FC<DashboardProps> = ({ transactions, onAddTransaction, o
     return Object.entries(expensesByCategory)
       .map(([name, val]) => ({
         name,
-        amount: val,
-        percentage: totalExpense > 0 ? (val / totalExpense) * 100 : 0,
-        color: CATEGORY_STYLES[name]?.color || 'text-slate-400'
+        amount: val as number,
+        percentage: totalExpense > 0 ? ((val as number) / totalExpense) * 100 : 0,
+        color: CATEGORY_STYLES[name]?.color || 'text-neutral-400'
       }))
       .sort((a, b) => b.amount - a.amount);
   }, [filteredTransactions, totalExpense]);
@@ -137,71 +137,71 @@ const Dashboard: React.FC<DashboardProps> = ({ transactions, onAddTransaction, o
   };
 
   return (
-    <div className="h-full overflow-y-auto space-y-6 p-1 pb-20">
+    <div className="h-full overflow-y-auto space-y-6 p-1 pb-20 custom-scrollbar">
       
       {/* --- Visual Header Banner --- */}
-      <div className="relative w-full h-40 rounded-3xl overflow-hidden shadow-2xl">
+      <div className="relative w-full h-40 rounded-3xl overflow-hidden shadow-2xl border border-neutral-800">
         <img 
-          src="https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?q=80&w=2071&auto=format&fit=crop" 
-          alt="Finance Background" 
-          className="absolute inset-0 w-full h-full object-cover opacity-60 hover:scale-105 transition-transform duration-700"
+          src="https://images.unsplash.com/photo-1620641788421-7a1c342ea42e?q=80&w=1974&auto=format&fit=crop" 
+          alt="Gold Finance Background" 
+          className="absolute inset-0 w-full h-full object-cover opacity-60 grayscale-[50%] hover:scale-105 transition-transform duration-700"
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-orange-950/90 to-transparent flex items-center px-8">
-           <div>
-              <h1 className="text-3xl font-bold text-white mb-1 drop-shadow-md">Gestão de Ouro</h1>
-              <p className="text-orange-200 text-sm font-medium">Controle suas finanças e prospere.</p>
+        <div className="absolute inset-0 bg-gradient-to-r from-neutral-950/90 via-neutral-900/60 to-transparent flex items-center px-8">
+           <div className="animate-fade-in-up">
+              <h1 className="text-3xl font-bold text-white mb-1 drop-shadow-md">Controle Financeiro</h1>
+              <p className="text-orange-200 text-sm font-medium">Seu patrimônio, suas regras.</p>
            </div>
         </div>
       </div>
 
       {/* Date Navigator */}
-      <div className="flex items-center justify-between bg-slate-900 border border-slate-800 p-4 rounded-2xl shadow-lg sticky top-0 z-30 backdrop-blur-md bg-opacity-80">
-        <button onClick={prevMonth} className="p-2 hover:bg-slate-800 rounded-full text-slate-400 hover:text-orange-400 transition-colors">
+      <div className="flex items-center justify-between bg-neutral-900 border border-neutral-800 p-4 rounded-2xl shadow-lg sticky top-0 z-30 backdrop-blur-md bg-opacity-80">
+        <button onClick={prevMonth} className="p-2 hover:bg-neutral-800 rounded-full text-neutral-400 hover:text-orange-400 transition-colors">
           <ChevronLeft className="w-6 h-6" />
         </button>
         <h2 className="text-xl font-bold text-white capitalize flex items-center gap-2">
           {monthName}
         </h2>
-        <button onClick={nextMonth} className="p-2 hover:bg-slate-800 rounded-full text-slate-400 hover:text-orange-400 transition-colors">
+        <button onClick={nextMonth} className="p-2 hover:bg-neutral-800 rounded-full text-neutral-400 hover:text-orange-400 transition-colors">
           <ChevronRight className="w-6 h-6" />
         </button>
       </div>
 
       {/* Stats Cards Row */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-        <div className="bg-slate-900 border border-slate-800 p-6 rounded-2xl shadow-lg relative overflow-hidden group">
+        <div className="bg-neutral-900 border border-neutral-800 p-6 rounded-2xl shadow-lg relative overflow-hidden group">
           <div className="absolute right-0 top-0 w-24 h-24 bg-orange-500/5 rounded-full blur-2xl group-hover:bg-orange-500/10 transition-colors"></div>
           <div className="flex items-center gap-3 mb-2 relative z-10">
             <div className="p-2 bg-orange-500/20 rounded-lg">
               <DollarSign className="w-5 h-5 text-orange-400" />
             </div>
-            <h3 className="text-slate-400 text-sm font-medium">Saldo Mensal</h3>
+            <h3 className="text-neutral-400 text-sm font-medium">Saldo Mensal</h3>
           </div>
           <p className={`text-2xl font-bold relative z-10 ${balance >= 0 ? 'text-orange-400' : 'text-red-400'}`}>
             R$ {balance.toFixed(2)}
           </p>
         </div>
 
-        <div className="bg-slate-900 border border-slate-800 p-6 rounded-2xl shadow-lg relative overflow-hidden">
+        <div className="bg-neutral-900 border border-neutral-800 p-6 rounded-2xl shadow-lg relative overflow-hidden">
           <div className="absolute right-0 top-0 w-24 h-24 bg-emerald-500/5 rounded-full blur-2xl"></div>
           <div className="flex items-center gap-3 mb-2 relative z-10">
             <div className="p-2 bg-emerald-500/20 rounded-lg">
               <TrendingUp className="w-5 h-5 text-emerald-400" />
             </div>
-            <h3 className="text-slate-400 text-sm font-medium">Receitas</h3>
+            <h3 className="text-neutral-400 text-sm font-medium">Receitas</h3>
           </div>
           <p className="text-2xl font-bold text-emerald-400 relative z-10">
             R$ {totalIncome.toFixed(2)}
           </p>
         </div>
 
-        <div className="bg-slate-900 border border-slate-800 p-6 rounded-2xl shadow-lg relative overflow-hidden">
+        <div className="bg-neutral-900 border border-neutral-800 p-6 rounded-2xl shadow-lg relative overflow-hidden">
           <div className="absolute right-0 top-0 w-24 h-24 bg-rose-500/5 rounded-full blur-2xl"></div>
           <div className="flex items-center gap-3 mb-2 relative z-10">
             <div className="p-2 bg-rose-500/20 rounded-lg">
               <TrendingDown className="w-5 h-5 text-rose-400" />
             </div>
-            <h3 className="text-slate-400 text-sm font-medium">Despesas</h3>
+            <h3 className="text-neutral-400 text-sm font-medium">Despesas</h3>
           </div>
           <p className="text-2xl font-bold text-rose-400 relative z-10">
             R$ {totalExpense.toFixed(2)}
@@ -216,7 +216,7 @@ const Dashboard: React.FC<DashboardProps> = ({ transactions, onAddTransaction, o
         <div className="xl:col-span-2 space-y-6">
           
           {/* Quick Add Form */}
-          <div className="bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-xl relative overflow-hidden">
+          <div className="bg-neutral-900 border border-neutral-800 rounded-2xl p-6 shadow-xl relative overflow-hidden">
              {/* Smart Entry Button */}
              <div className="absolute top-4 right-4 z-20">
                <button 
@@ -233,12 +233,12 @@ const Dashboard: React.FC<DashboardProps> = ({ transactions, onAddTransaction, o
             
             <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-4 relative z-10">
               {/* Type Toggle */}
-              <div className="lg:col-span-4 flex bg-slate-800 rounded-lg p-1 h-[46px]">
+              <div className="lg:col-span-4 flex bg-neutral-800 rounded-lg p-1 h-[46px]">
                 <button
                   type="button"
                   onClick={() => setType(TransactionType.EXPENSE)}
                   className={`flex-1 rounded-md text-sm font-medium transition-all ${
-                    type === TransactionType.EXPENSE ? 'bg-rose-500 text-white shadow' : 'text-slate-400 hover:text-white'
+                    type === TransactionType.EXPENSE ? 'bg-rose-600 text-white shadow' : 'text-neutral-400 hover:text-white'
                   }`}
                 >
                   Saída
@@ -247,7 +247,7 @@ const Dashboard: React.FC<DashboardProps> = ({ transactions, onAddTransaction, o
                   type="button"
                   onClick={() => setType(TransactionType.INCOME)}
                   className={`flex-1 rounded-md text-sm font-medium transition-all ${
-                    type === TransactionType.INCOME ? 'bg-emerald-500 text-white shadow' : 'text-slate-400 hover:text-white'
+                    type === TransactionType.INCOME ? 'bg-emerald-600 text-white shadow' : 'text-neutral-400 hover:text-white'
                   }`}
                 >
                   Entrada
@@ -256,12 +256,12 @@ const Dashboard: React.FC<DashboardProps> = ({ transactions, onAddTransaction, o
 
               {/* Expense Specific Toggle */}
               {type === TransactionType.EXPENSE ? (
-                <div className="lg:col-span-8 flex bg-slate-800 rounded-lg p-1 h-[46px]">
+                <div className="lg:col-span-8 flex bg-neutral-800 rounded-lg p-1 h-[46px]">
                   <button
                     type="button"
                     onClick={() => setExpenseType(ExpenseType.FIXED)}
                     className={`flex-1 flex items-center justify-center gap-2 rounded-md text-sm font-medium transition-all ${
-                      expenseType === ExpenseType.FIXED ? 'bg-slate-600 text-white shadow' : 'text-slate-400 hover:text-white'
+                      expenseType === ExpenseType.FIXED ? 'bg-neutral-600 text-white shadow' : 'text-neutral-400 hover:text-white'
                     }`}
                   >
                     <Repeat className="w-3 h-3" /> Fixo
@@ -270,7 +270,7 @@ const Dashboard: React.FC<DashboardProps> = ({ transactions, onAddTransaction, o
                     type="button"
                     onClick={() => setExpenseType(ExpenseType.SPORADIC)}
                     className={`flex-1 flex items-center justify-center gap-2 rounded-md text-sm font-medium transition-all ${
-                      expenseType === ExpenseType.SPORADIC ? 'bg-slate-600 text-white shadow' : 'text-slate-400 hover:text-white'
+                      expenseType === ExpenseType.SPORADIC ? 'bg-neutral-600 text-white shadow' : 'text-neutral-400 hover:text-white'
                     }`}
                   >
                     <ShoppingBag className="w-3 h-3" /> Esporádico
@@ -287,7 +287,7 @@ const Dashboard: React.FC<DashboardProps> = ({ transactions, onAddTransaction, o
                   value={description}
                   onChange={(e) => setDescription(e.target.value)}
                   onBlur={() => { if(description) handleAutoCategorize() }}
-                  className="w-full bg-slate-950 border border-slate-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-orange-500 h-[46px]"
+                  className="w-full bg-neutral-950 border border-neutral-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-orange-500 h-[46px] placeholder-neutral-500"
                   required
                 />
                 {isAutoCategorizing && (
@@ -305,7 +305,7 @@ const Dashboard: React.FC<DashboardProps> = ({ transactions, onAddTransaction, o
                   onChange={(e) => setAmount(e.target.value)}
                   step="0.01"
                   min="0"
-                  className="w-full bg-slate-950 border border-slate-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-orange-500 h-[46px]"
+                  className="w-full bg-neutral-950 border border-neutral-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-orange-500 h-[46px] placeholder-neutral-500"
                   required
                 />
               </div>
@@ -314,7 +314,7 @@ const Dashboard: React.FC<DashboardProps> = ({ transactions, onAddTransaction, o
                 <select
                   value={category}
                   onChange={(e) => setCategory(e.target.value)}
-                  className="w-full bg-slate-950 border border-slate-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-orange-500 h-[46px] appearance-none"
+                  className="w-full bg-neutral-950 border border-neutral-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-orange-500 h-[46px] appearance-none"
                 >
                   {CATEGORIES.map(cat => (
                     <option key={cat} value={cat}>{cat}</option>
@@ -334,7 +334,7 @@ const Dashboard: React.FC<DashboardProps> = ({ transactions, onAddTransaction, o
           </div>
 
           {/* New Daily Sporadic Chart */}
-          <div className="bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-lg">
+          <div className="bg-neutral-900 border border-neutral-800 rounded-2xl p-6 shadow-lg">
              <div className="flex items-center justify-between mb-4">
                 <h3 className="text-lg font-semibold text-white flex items-center gap-2">
                   <ShoppingBag className="w-5 h-5 text-orange-400" /> Picos de Gastos Esporádicos
@@ -347,7 +347,7 @@ const Dashboard: React.FC<DashboardProps> = ({ transactions, onAddTransaction, o
                 )}
              </div>
              
-             <div className="text-sm text-slate-400 mb-6">
+             <div className="text-sm text-neutral-400 mb-6">
                 Veja em quais dias do mês você teve gastos não planejados.
              </div>
 
@@ -356,7 +356,7 @@ const Dashboard: React.FC<DashboardProps> = ({ transactions, onAddTransaction, o
         </div>
 
         {/* Right Column: Category Donut Chart */}
-        <div className="xl:col-span-1 bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-xl h-fit">
+        <div className="xl:col-span-1 bg-neutral-900 border border-neutral-800 rounded-2xl p-6 shadow-xl h-fit">
           <h3 className="text-lg font-semibold text-white mb-6 flex items-center gap-2">
              <PieChart className="w-5 h-5 text-orange-400" /> Distribuição
           </h3>
@@ -364,12 +364,12 @@ const Dashboard: React.FC<DashboardProps> = ({ transactions, onAddTransaction, o
           <CategoryDonutChart data={categoryData} />
 
           {/* Mini Legend for Fixed vs Sporadic inside Category card for completeness */}
-           <div className="mt-8 pt-6 border-t border-slate-800">
-             <h4 className="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-3">Resumo do Mês</h4>
+           <div className="mt-8 pt-6 border-t border-neutral-800">
+             <h4 className="text-xs font-semibold text-neutral-500 uppercase tracking-wider mb-3">Resumo do Mês</h4>
              <div className="space-y-3">
                <div className="flex justify-between items-center text-sm">
-                 <span className="text-slate-400 flex items-center gap-2">
-                    <Repeat className="w-3 h-3 text-slate-500" /> Fixos
+                 <span className="text-neutral-400 flex items-center gap-2">
+                    <Repeat className="w-3 h-3 text-neutral-500" /> Fixos
                  </span>
                  <span className="text-white font-mono">
                    {totalExpense > 0 
@@ -378,8 +378,8 @@ const Dashboard: React.FC<DashboardProps> = ({ transactions, onAddTransaction, o
                  </span>
                </div>
                <div className="flex justify-between items-center text-sm">
-                 <span className="text-slate-400 flex items-center gap-2">
-                    <ShoppingBag className="w-3 h-3 text-slate-500" /> Esporádicos
+                 <span className="text-neutral-400 flex items-center gap-2">
+                    <ShoppingBag className="w-3 h-3 text-neutral-500" /> Esporádicos
                  </span>
                  <span className="text-white font-mono">
                    {totalExpense > 0 

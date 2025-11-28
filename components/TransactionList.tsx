@@ -11,14 +11,14 @@ const TransactionList: React.FC<TransactionListProps> = ({ transactions, onDelet
   const sortedTransactions = [...transactions].sort((a, b) => b.date - a.date);
 
   return (
-    <div className="h-full bg-slate-900 rounded-xl border border-slate-800 flex flex-col overflow-hidden">
-      <div className="p-6 border-b border-slate-800 bg-slate-950/50">
+    <div className="h-full bg-neutral-900 rounded-xl border border-neutral-800 flex flex-col overflow-hidden shadow-xl">
+      <div className="p-6 border-b border-neutral-800 bg-neutral-950/50">
         <h2 className="text-xl font-bold text-white">Histórico Detalhado</h2>
       </div>
       
-      <div className="flex-1 overflow-y-auto p-4 space-y-3">
+      <div className="flex-1 overflow-y-auto p-4 space-y-3 custom-scrollbar">
         {sortedTransactions.length === 0 ? (
-          <div className="text-center py-20 text-slate-500">
+          <div className="text-center py-20 text-neutral-500">
             <p>Nenhuma transação registrada ainda.</p>
           </div>
         ) : (
@@ -27,7 +27,7 @@ const TransactionList: React.FC<TransactionListProps> = ({ transactions, onDelet
             const Icon = style.icon;
 
             return (
-              <div key={t.id} className="group bg-slate-800/50 hover:bg-slate-800 border border-slate-700/50 hover:border-slate-600 rounded-xl p-4 transition-all flex items-center justify-between">
+              <div key={t.id} className="group bg-neutral-800/50 hover:bg-neutral-800 border border-neutral-700/50 hover:border-neutral-600 rounded-xl p-4 transition-all flex items-center justify-between">
                 <div className="flex items-center gap-4">
                   {/* Category Icon */}
                   <div className={`p-3 rounded-xl ${style.bgColor}`}>
@@ -47,9 +47,9 @@ const TransactionList: React.FC<TransactionListProps> = ({ transactions, onDelet
                         </span>
                       )}
                     </h4>
-                    <div className="flex items-center gap-3 text-xs text-slate-400 mt-1">
+                    <div className="flex items-center gap-3 text-xs text-neutral-400 mt-1">
                       <span className="opacity-75">{t.category}</span>
-                      <span className="w-1 h-1 bg-slate-600 rounded-full"></span>
+                      <span className="w-1 h-1 bg-neutral-600 rounded-full"></span>
                       <span className="flex items-center gap-1">
                         <Calendar className="w-3 h-3" /> {new Date(t.date).toLocaleDateString()}
                       </span>
@@ -59,13 +59,13 @@ const TransactionList: React.FC<TransactionListProps> = ({ transactions, onDelet
 
                 <div className="flex items-center gap-4">
                   <span className={`font-semibold ${
-                    t.type === TransactionType.INCOME ? 'text-emerald-400' : 'text-slate-200'
+                    t.type === TransactionType.INCOME ? 'text-emerald-400' : 'text-neutral-200'
                   }`}>
                     {t.type === TransactionType.INCOME ? '+' : '-'} R$ {t.amount.toFixed(2)}
                   </span>
                   <button 
                     onClick={() => onDelete(t.id)}
-                    className="p-2 text-slate-600 hover:text-red-400 hover:bg-red-400/10 rounded-lg opacity-0 group-hover:opacity-100 transition-all"
+                    className="p-2 text-neutral-600 hover:text-red-400 hover:bg-red-400/10 rounded-lg opacity-0 group-hover:opacity-100 transition-all"
                     title="Excluir"
                   >
                     <Trash className="w-4 h-4" />
